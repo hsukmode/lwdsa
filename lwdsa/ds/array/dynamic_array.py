@@ -14,6 +14,9 @@ class DynamicArray:
         self.capacity = capacity
         self.array = [None] * self.capacity
         self.size = 0
+
+    def __len__(self):
+        return self.size 
         
     def _resize(self):
         """resize array"""
@@ -35,8 +38,12 @@ class DynamicArray:
         self.array[self.size] = val
         self.size += 1
 
-    def pop(self):
-        pass
+    def pop(self) -> Any:
+        """remove last value in array
+        """
+        val = self.array[self.size - 1]
+        self.array[self.size -1] = None 
+        return val
 
 
     def get(self, idx: int) -> Any:

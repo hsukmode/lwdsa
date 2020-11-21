@@ -19,7 +19,7 @@ class DynamicArray:
         """resize array"""
         self.capacity = self.size * 2
         resized_array = [None] * self.capacity
-        for idx, val in enumerate(resized_array):
+        for idx, val in enumerate(self.array):
             resized_array[idx] = val
         self.array = resized_array
 
@@ -51,7 +51,7 @@ class DynamicArray:
         Returns:
             [Any]: value in DynamicArray at idx
         """
-        if 0 > self.idx > self.length:
+        if 0 > idx > self.length:
             raise IndexError("inaccessable index")
-
+        print(self.array)
         return self.array[idx]

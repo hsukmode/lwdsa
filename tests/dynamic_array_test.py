@@ -7,7 +7,7 @@ def test_initialization():
     assert len(d.array) == 3
 
 
-def test_dynamic_resizing():
+def test_dynamic_resizing_and_access():
     d = DynamicArray(capacity=5)
     d.add(5)
     d.add(1)
@@ -17,6 +17,10 @@ def test_dynamic_resizing():
     d.add(10)
     assert len(d.array) == 10
 
+    assert d.get(0) == 5
+    assert d.get(6) is None
+    assert d.get(5) == 10
+    
     
 
 

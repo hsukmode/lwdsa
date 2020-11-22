@@ -1,10 +1,10 @@
 """
-Implements a dynamic array 
+Implements a dynamic array, or "ArrayList"
 """
 from typing import Any
 
 
-class DynamicArray:
+class ArrayList:
     def __init__(self, capacity: int):
         """creates a dynamic array
 
@@ -38,7 +38,7 @@ class DynamicArray:
         self.array[self.size] = val
         self.size += 1
 
-    def pop(self) -> Any:
+    def remove_last(self) -> Any:
         """remove last value in array
         """
         val = self.array[self.size - 1]

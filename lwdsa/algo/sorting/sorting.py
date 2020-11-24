@@ -3,6 +3,7 @@ implementation of several sorting algorithms
 """
 from typing import List, Literal
 from concurrent.futures import ThreadPoolExecutor
+import math
 
 
 def sleep_sort(nums: List[int]) -> List[int]:
@@ -99,7 +100,7 @@ def insertion_sort(nums: List[int], method: Literal["iterative", "recursive"]) -
 
 
 
-def counting_sort(nums: List[int]) -> List[int]:
+def counting_sort(nums: List[int], bucket_size: Optional[int], exponent: int = 1) -> List[int]:
     """counting sort creates k buckets (where values in num are within range (0, nums -1))
 
     Implementation based on this:
@@ -117,9 +118,11 @@ def counting_sort(nums: List[int]) -> List[int]:
     if not nums:
         return nums
     
-    buckets = [[]] * max(nums)
+    bucket_size = bucket_size if bucket_size else max(nums)
+    buckets = [[]] * bucket_size
+
     for j in range(len(nums)):
-        buckets[nums[j]].extend(nums[j])
+        buckets[nums[j] ** (exponent % 10)].extend(nums[j])
 
     sorted_output = []
     for bucket in buckets:
@@ -128,18 +131,26 @@ def counting_sort(nums: List[int]) -> List[int]:
     return sorted_output
 
 
+    
+
+
 def radix_sort(nums: List[int]) -> List[int]:
     """Radix sort is the 
     This implementation is the MSD version of radix sort, each digit is sorted based 
     on modified version of counting sort
 
     Args:
-        nums (List[int]): [description]
+        nums (List[int]): positive list of numbers
 
     Returns:
-        List[int]: [description]
+        List[int]: sorted list of numbers
     """
-    pass
+    max_num = max(nums)
+    digits = math.floor(math.log10(max_num + 1))
+
+    while digits:
+        (10 
+        digits -= 1 
 
 
 def _merge(list_one: List[int], list_two: List[int]) -> List[int]:

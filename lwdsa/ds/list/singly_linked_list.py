@@ -4,7 +4,7 @@ Implementation of a singly linked list class
 from typing import Literal, Any
 
 class Node:
-    def __init__(self, val: Any = None, next=None):
+    def __init__(self, val: None, next=None):
         self.val = val
         self.next = next
 
@@ -13,7 +13,7 @@ class SinglyLinkedList:
         
     def __init__(self):
         self.size = 0
-
+        self.first = None
 
     def add_first(self, val: Any) -> None:
         if self.size == 0:
@@ -51,6 +51,16 @@ class SinglyLinkedList:
 
     def __len__(self):
         return self.size
+
+    def __repr__(self) -> str:
+        str_representation = []
+        first = self.first
+        while first:
+            str_representation.append(f"{first.val}")
+            if first.next:
+                str_representation.append(" -> ")
+            first = first.next
+        return ''.join(str_representation)
 
 
         

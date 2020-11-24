@@ -47,39 +47,59 @@ class DoublyLinkedList:
         self.size += 1
 
     def remove_first(self) -> None:
+        """removes first element of linked list
+
+        Raises:
+            Exception: [description]
+        """
         if self.is_empty():
             raise Exception("Nothing to Remove")
         
         new_first = self.sentinel.next.next
-        self.sentinel.prev = new_first
+        self.sentinel.next = new_first
+        new_first.prev = self.sentinel
+
 
     def remove_last(self) -> None:
-        pass 
+        """removes last element of linked list
 
-    def remove(self) -> Any:
-        pass
+        Raises:
+            Exception: [description]
+        """
+        if self.is_empty():
+            raise Exception("Nothing to Remove")
+
+        second_to_last = sentinel.prev.prev
+        sentinel.prev =  second_to_last
+        second_to_last.next = None 
 
 
-    def add(self, val: Any, index: int):
-        if index < 0 or index > self.size - 1:
-            raise Exception("Invalid Index")
+    def get(self, index: int) -> Any:
+        """get value at specified index
+
+        Args:
+            index (int): index of value to be retrieved
+
+        Returns:
+            Any: [description]
+        """
+        if self.empty():
+            raise Exception("Nothing to get!")
         
-        if index == 0:
-            self.add_first(val)
-        elif index == self.size - 1:
-            self.add_last(val)
-        else:
 
-            pass
-
-    def get(self, index) -> Index:
         first = self.sentinel.next
-        count = 0
-        while first:
+        cur_idx = 0
+        while cur_idx < index:
             first = first.next 
+            cur_idx += 1
         return first.val        
 
     def is_empty(self) -> bool:
+        """returns whether the Doubly Linked List is Empty
+
+        Returns:
+            bool: True if empty
+        """
         return self.size == 0
     
     def __len__(self) -> int:

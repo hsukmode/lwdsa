@@ -42,9 +42,9 @@ def test_doubly_linked_list():
     DLL.add_last(10)
     DLL.add_last(10)
 
-    assert DLL.sentinel.next.val = 5
-    assert DLL.sentinel.next.val = 5
-    assert DLL.sentinel.next.val = 6
+    assert DLL.sentinel.next.val == 5
+    assert DLL.sentinel.next.val == 5
+    assert DLL.sentinel.next.val == 6
 
 
 

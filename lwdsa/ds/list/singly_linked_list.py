@@ -10,7 +10,7 @@ class Node:
         self.next = next
 
 
-class EmptyListError(Execption):
+class EmptyListError(Exception):
     """Raises error when empty list exists"""
 
 
@@ -42,14 +42,14 @@ class SinglyLinkedList:
         Returns:
             Any: first value in linkkedlist
         """
-        if self.empty:
+        if self.is_empty():
             raise EmptyListError("Linked List is Size of 0")
         return self.first.val
 
     def _traverse_to_back(self, list_node: Node) -> Node:
         """Traverses to last Node"""
         if list_node.next is None:
-            return listNode
+            return list_node
         else:
             return self._traverse_to_back(list_node.next)
 

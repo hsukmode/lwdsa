@@ -59,7 +59,7 @@ def bubble_sort(nums: List[int]) -> List[int]:
 def selection_sort(nums: List[int]) -> List[int]:
     """selection sort algorithm is implemented as follows
     start with a pointer at the beginning of the list.
-    each iteration, find the minimum element by traversing 
+    each iteration, find the minimum element by traversing
     through values and swapping with the pointer
     increase pointer by one after each iteration until you have reached end of the list.
     in a sense, it is very similiar to bubble sort
@@ -78,10 +78,9 @@ def selection_sort(nums: List[int]) -> List[int]:
                 nums[i], nums[j] = nums[j], nums[i]
 
     return nums
-    
 
 
-def insertion_sort(nums: List[int], method: Literal["iterative", "recursive"]) -> List[int]:
+def insertion_sort(nums: List[int]) -> List[int]:
     """implementation of insertation sort algorithm
 
     Args:
@@ -94,13 +93,14 @@ def insertion_sort(nums: List[int], method: Literal["iterative", "recursive"]) -
         for j in range(i, 0, -1):
             if nums[j] > nums[j - 1]:
                 break
-            nums[j], nums[j -1] = nums[j -1], nums[j]
-    
+            nums[j], nums[j - 1] = nums[j - 1], nums[j]
+
     return nums
 
 
-
-def counting_sort(nums: List[int], bucket_size: Optional[int], exponent: int = 1) -> List[int]:
+def counting_sort(
+    nums: List[int], bucket_size: Optional[int] = None, exponent: int = 1
+) -> List[int]:
     """counting sort creates k buckets (where values in num are within range (0, nums -1))
 
     Implementation based on this:
@@ -113,35 +113,33 @@ def counting_sort(nums: List[int], bucket_size: Optional[int], exponent: int = 1
     Returns:
         List[int]: sorted nums
     """
-    if min(nums) < 0:
-        raise Exception("this implementation of counting sort only takes in positive numers!")
     if not nums:
         return nums
-    
-    
-    bucket_size = bucket_size if bucket_size else max(nums)
-    buckets = [[] for i in range(bucket_size)]
-    
-    
+
+    if min(nums) < 0:
+        raise Exception(
+            "this implementation of counting sort only takes in positive numers!"
+        )
+
+    # differentiate for radix sort
+    new_bucket_size = bucket_size if bucket_size else max(nums) + 1
+    buckets = [[] for i in range(new_bucket_size)]
+
     for j in range(len(nums)):
-        idx = (nums[j] // exponent) % 10
-        print(nums[j])
+        # differentiate for radix sort
+        idx = (nums[j] // exponent) % 10 if bucket_size else nums[j]
         buckets[idx].append(nums[j])
 
     sorted_output = []
     for bucket in buckets:
         sorted_output.extend(bucket)
-        
-    
-    print(buckets)
-    return sorted_output
 
-    
+    return sorted_output
 
 
 def radix_sort(nums: List[int]) -> List[int]:
     """Radix sort allows us to sort digits in linear time
-    This implementation is the MSD version of radix sort, each digit is sorted based 
+    This implementation is the MSD version of radix sort, each digit is sorted based
     on modified version of counting sort
 
     Args:
@@ -150,19 +148,18 @@ def radix_sort(nums: List[int]) -> List[int]:
     Returns:
         List[int]: sorted list of numbers
     """
+    if not nums:
+        return nums
     max_num = max(nums)
     digits = math.floor(math.log10(max_num + 1)) + 1
-    
+
     exponent = 1
 
     for i in range(digits):
-        
-        nums = counting_sort(nums=nums, bucket_size=10, exponent=exponent) 
-        exponent = exponent * 10
-        
-        
 
-    
+        nums = counting_sort(nums=nums, bucket_size=10, exponent=exponent)
+        exponent = exponent * 10
+
     return nums
 
 
@@ -172,7 +169,7 @@ def _merge(list_one: List[int], list_two: List[int]) -> List[int]:
     merged = []
     while list_one_idx < len(list_one) and list_two_idx < len(list_two):
         if list_one[list_one_idx] < list_two[list_two_idx]:
-            merged.append(list_one[list_one_idx] )
+            merged.append(list_one[list_one_idx])
             list_one_idx += 1
         else:
             merged.append(list_two[list_two_idx])
@@ -186,21 +183,19 @@ def _merge(list_one: List[int], list_two: List[int]) -> List[int]:
 
 def merge_sort(nums: List[int]) -> List[int]:
     if len(nums) == 0 or len(nums) == 1:
-        return nums[:len(nums)]
+        return nums[: len(nums)]
     halfway = len(list) // 2
     list1 = list[0:halfway]
-    list2 = list[halfway:len(list)]
-    newlist1 = msort(list1) # recursively sort left half
-    newlist2 = msort(list2) # recursively sort right half
+    list2 = list[halfway : len(list)]
+    newlist1 = msort(list1)  # recursively sort left half
+    newlist2 = msort(list2)  # recursively sort right half
     newlist = merge(newlist1, newlist2)
-    return newlist    
+    return newlist
+
 
 def quick_sort(nums: List[int]) -> List[int]:
     pass
-   
 
 
 def heap_sort(nums: List[int]) -> List[int]:
     pass
-
-

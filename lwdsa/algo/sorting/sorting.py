@@ -84,10 +84,10 @@ def insertion_sort(nums: List[int]) -> List[int]:
     """implementation of insertation sort algorithm
 
     Args:
-        nums (List[int]): [description]
+        nums (List[int]): list of nums
 
     Returns:
-        List[int]: [description]
+        List[int]: sorted list of nums
     """
     for i in range(1, len(nums)):
         for j in range(i, 0, -1):

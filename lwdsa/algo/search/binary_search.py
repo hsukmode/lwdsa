@@ -1,9 +1,7 @@
 from typing import List, Optional, Literal
 
 
-def _binary_search_recursive(
-    nums: List[int], value: int, left: int, right: int
-) -> bool:
+def _binary_search_recursive(nums: List[int], value: int, left: int, right: int) -> bool:
     """Recursive implementation of binary search"""
     if left > right:
         return False

@@ -1,3 +1,5 @@
+# flake8: noqa
+
 from lwdsa.algo.search import binary_search
 
 

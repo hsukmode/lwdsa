@@ -1,10 +1,11 @@
 """general util functions"""
 
+
 def num_of_digits(num: int) -> int:
     """returns number of digits in a number
 
     Args:
-        num (int): 
+        num (int):
 
     Returns:
         int: number of digits in an integer
@@ -12,5 +13,5 @@ def num_of_digits(num: int) -> int:
     count = 0
     while num:
         count += 1
-        num // = 10
+        num //= 10
     return count

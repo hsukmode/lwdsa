@@ -16,8 +16,8 @@ class ArrayList:
         self.size = 0
 
     def __len__(self):
-        return self.size 
-        
+        return self.size
+
     def _resize(self):
         """resize array"""
         self.capacity = self.size * 2
@@ -39,12 +39,10 @@ class ArrayList:
         self.size += 1
 
     def remove_last(self) -> Any:
-        """remove last value in array
-        """
+        """remove last value in array"""
         val = self.array[self.size - 1]
-        self.array[self.size -1] = None 
+        self.array[self.size - 1] = None
         return val
-
 
     def get(self, idx: int) -> Any:
         """gets the value of a specified index in DynamicArray
@@ -53,7 +51,7 @@ class ArrayList:
             idx (int): index of the DynamicArray
 
         Raises:
-            IndexError: out of bounds 
+            IndexError: out of bounds
 
         Returns:
             [Any]: value in DynamicArray at idx

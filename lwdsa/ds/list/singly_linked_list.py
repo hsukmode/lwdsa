@@ -1,7 +1,7 @@
 """
 Implementation of a singly linked list class
 """
-from typing import Literal, Any
+from typing import Any
 
 
 class Node:

@@ -1,16 +1,16 @@
 """Implementation of Doubly Linked List"""
 
-from typing import Any, Optional
+from typing import Any
+
 
 class DLLNode:
-
-    def __init__(self, val: Any = None, prev = None, next = None):
+    def __init__(self, val: Any = None, prev=None, next=None):
         self.val = val
         self.prev = prev
         self.next = next
 
-class DoublyLinkedList:
 
+class DoublyLinkedList:
     def __init__(self):
         self.sentinel = DLLNode()
         self.size = 0
@@ -22,8 +22,8 @@ class DoublyLinkedList:
         Args:
             val (Any): value to add
         """
-        cur_first = self.sentinel.next 
-        node_to_insert = DLLNode(val = val, next = cur_first)
+        cur_first = self.sentinel.next
+        node_to_insert = DLLNode(val=val, next=cur_first)
         self.sentinel.next = node_to_insert
 
         if self.is_empty():
@@ -37,8 +37,8 @@ class DoublyLinkedList:
         Args:
             val (Any): value to add
         """
-        cur_last = self.sentinel.prev 
-        node_to_insert = DLLNode(val = val, prev=cur_last)
+        cur_last = self.sentinel.prev
+        node_to_insert = DLLNode(val=val, prev=cur_last)
         self.sentinel.prev = node_to_insert
         cur_last.next = self.sentinel.prev
 
@@ -54,11 +54,10 @@ class DoublyLinkedList:
         """
         if self.is_empty():
             raise Exception("Nothing to Remove")
-        
+
         new_first = self.sentinel.next.next
         self.sentinel.next = new_first
         new_first.prev = self.sentinel
-
 
     def remove_last(self) -> None:
         """removes last element of linked list
@@ -69,10 +68,9 @@ class DoublyLinkedList:
         if self.is_empty():
             raise Exception("Nothing to Remove")
 
-        second_to_last = sentinel.prev.prev
-        sentinel.prev =  second_to_last
-        second_to_last.next = None 
-
+        second_to_last = self.sentinel.prev.prev
+        self.sentinel.prev = second_to_last
+        second_to_last.next = None
 
     def get(self, index: int) -> Any:
         """get value at specified index
@@ -85,14 +83,13 @@ class DoublyLinkedList:
         """
         if self.empty():
             raise Exception("Nothing to get!")
-        
 
         first = self.sentinel.next
         cur_idx = 0
         while cur_idx < index:
-            first = first.next 
+            first = first.next
             cur_idx += 1
-        return first.val        
+        return first.val
 
     def is_empty(self) -> bool:
         """returns whether the Doubly Linked List is Empty
@@ -101,10 +98,10 @@ class DoublyLinkedList:
             bool: True if empty
         """
         return self.size == 0
-    
+
     def __len__(self) -> int:
         return self.size
-    
+
     def __repr__(self) -> str:
         str_representation = []
         first = self.sentinel.next
@@ -113,7 +110,4 @@ class DoublyLinkedList:
             if first.next:
                 str_representation.append(" -> ")
             first = first.next
-        return ''.join(str_representation)
-
-
-    
+        return "".join(str_representation)

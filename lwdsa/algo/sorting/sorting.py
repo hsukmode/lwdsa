@@ -1,9 +1,10 @@
 """
 implementation of several sorting algorithms
 """
-from typing import List, Literal, Optional
-from concurrent.futures import ThreadPoolExecutor
+import concurrent
 import math
+import time
+from typing import List, Optional
 
 
 def sleep_sort(nums: List[int]) -> List[int]:
@@ -26,10 +27,9 @@ def sleep_sort(nums: List[int]) -> List[int]:
         return val
 
     sorted_results = []
-    with concurrent.future.ThreadPoolExecutor:
-        future_to_url = {executor.submit(sleep, num): num for num in nums}
-        for future in concurrent.futures.as_completed(future_to_url):
-            url = future_to_url[future]
+    with concurrent.future.ThreadPoolExecutor() as executor:
+        future_to_sort = {executor.submit(sleep, num): num for num in nums}
+        for future in concurrent.futures.as_completed(future_to_sort):
             data = future.result()
             sorted_results.append(data)
     return sorted_results
@@ -117,9 +117,7 @@ def counting_sort(
         return nums
 
     if min(nums) < 0:
-        raise Exception(
-            "this implementation of counting sort only takes in positive numers!"
-        )
+        raise Exception("this implementation of counting sort only takes in positive numers!")
 
     # differentiate for radix sort
     new_bucket_size = bucket_size if bucket_size else max(nums) + 1
@@ -143,7 +141,8 @@ def radix_sort(nums: List[int]) -> List[int]:
     on modified version of counting sort
 
     Args:
-        nums (List[int]): positive list of ints (no real constraint on input size unlike counting sort)
+        nums (List[int]):
+            positive list of ints (no real constraint on input size unlike counting sort)
 
     Returns:
         List[int]: sorted list of numbers
@@ -187,9 +186,9 @@ def merge_sort(nums: List[int]) -> List[int]:
     halfway = len(list) // 2
     list1 = list[0:halfway]
     list2 = list[halfway : len(list)]
-    newlist1 = msort(list1)  # recursively sort left half
-    newlist2 = msort(list2)  # recursively sort right half
-    newlist = merge(newlist1, newlist2)
+    newlist1 = merge_sort(list1)  # recursively sort left half
+    newlist2 = merge_sort(list2)  # recursively sort right half
+    newlist = _merge(newlist1, newlist2)
     return newlist
 
 
